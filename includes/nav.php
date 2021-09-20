@@ -13,14 +13,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                <?php   
-                $query = "SELECT * FROM cat";
-                $select_all=mysqli_query($connection,$query);
-                while($row =mysqli_fetch_assoc($select_all)){
-                    $cat_title = $row["cat_title"];
-                    echo "<li><a href='#'>{$cat_title}</a></li>";
-                }
-            ?>
+                        <?php   
+                        $query = "SELECT * FROM cat";
+                        $select_all=mysqli_query($connection,$query);
+                        while($row =mysqli_fetch_assoc($select_all)){
+                            $cat_title = $row["cat_title"];
+                            echo "<li><a href='#'>{$cat_title}</a></li>";
+                        }
+                    ?>
             
              <li>
                  <a href="admin">Admin</a>
