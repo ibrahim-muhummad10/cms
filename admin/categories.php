@@ -19,15 +19,40 @@
 
                             <?php
 
-                            if(isset($_POST['submit'])){
-                                $cat_title = $_POST['cat_title'];
-                               if(empty($cat_title)|| $cat_title == "" ){
-                                   echo "this field can't be empty";
-                               }else{
-                                $query = "INSERT INTO  cat(cat_title) VALUE ('{$cat_title}')";
-                                mysqli_query($connection,$query);
-                               }
-                            }
+                            if(isset($_GET['edit'])){
+                               $cat_id = $_GET['edit'];
+                                 $query = "SELECT cat_title FROM cat WHERE cat_id = $cat_id";
+                              $edit_cat=  mysqli_query($connection,$query);
+                              while($row =mysqli_fetch_assoc($edit_cat)){
+                                $cat_title = $row["cat_title"];}
+                             
+                                if(isset($_POST['edit'] )&& $_POST['cat_title']!=""&&!empty( $_POST['cat_title'])){
+                                    $cat_title = $_POST['cat_title'];
+                                    $cat_id = $_GET['edit'];
+                                   
+                                    $query = "UPDATE cat  SET cat_title = '{$cat_title}' where cat_id = $cat_id";
+                                    mysqli_query($connection,$query);
+                                    header("location: categories.php");
+                                }
+                                ?>
+                                <form action="" method="post">
+                                <div class="form-group">
+                                    <label for="cat-title">edit category</label>
+                                    <input type="text" class="form-control" value="<?= $cat_title ?>" name="cat_title">
+                                </div>
+                                <div class="form-group">
+                                   
+                                    <input type="submit" class="btn btn-primary" name="edit" value="edit category">
+                                </div>
+                            </form>
+                                
+
+                            <?php 
+                                   
+                                 
+
+                              }  else{
+                                insertCat();
 
                             ?>
 
@@ -41,6 +66,7 @@
                                     <input type="submit" class="btn btn-primary" name="submit" value="add category">
                                 </div>
                             </form>
+                            <?php } ?>
                         </div>
                         <div class="col-sm-6">
 
@@ -63,6 +89,7 @@
                                             echo "<td>{$cat_id}</td>";
                                            echo "<td>{$cat_title}</td>";
                                            echo "<td><a href='categories.php?delete={$cat_id}'>delete</a></td>";
+                                           echo "<td><a href='categories.php?edit={$cat_id}'>edit</a></td>";
                                            echo "</tr>";
                                         }
 
