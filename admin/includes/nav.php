@@ -41,7 +41,7 @@
                                 <a href="posts.php">view all posts</a>
                             </li>
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="posts.php?source=add_post">add post</a>
                             </li>
                         </ul>
                     </li>

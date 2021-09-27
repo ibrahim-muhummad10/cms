@@ -1,5 +1,15 @@
 <?php
 
+
+function confirmQuery($result){
+    global $connection;
+    if(!$result) {
+        die("err".mysqli_error($connection));
+    }
+}
+
+
+
 function insertCat(){
     global $connection;
     if(isset($_POST['submit'])){

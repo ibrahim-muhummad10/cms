@@ -25,8 +25,8 @@
                         include "includes/add_post.php";
                         break;
 
-                        case '1';
-                        echo "zbi";
+                        case 'edit_posts.php';
+                        include "includes/edit_posts.php";
                         break;
                         case '2';
                         echo "zbi";
