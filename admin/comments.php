@@ -33,7 +33,7 @@
                         break;
 
                         default:
-                        include "includes/view_posts.php";
+                        include "includes/view_comments.php";
                         break;
                     }
                       ?>

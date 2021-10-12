@@ -2,7 +2,7 @@
 <?php
 if(isset($_POST['create_post'])){
     
-    $cat_id = $_POST["post_category_id"];
+    $cat_id = $_POST["post_category"];
     $post_title = $_POST["title"];
     $post_author = $_POST["author"];
     $post_image = $_FILES['post_image']['name'];
@@ -11,12 +11,11 @@ if(isset($_POST['create_post'])){
     $post_date = date("d-m-y");
     $status = $_POST["post_status"];    
     $post_tags = $_POST["post_tags"];
-    $post_comment_count = 4;
+   
     move_uploaded_file($post_image_temp,"../img/$post_image");
 
-    $query = "INSERT INTO posts (cat_id,post_title,post_author,post_image,post_content,post_date,
-    post_comment_count,post_status,post_tags)
-    VALUES ({$cat_id},'{$post_title}','{$post_author}','{$post_image}','{$post_content}',now(),'{$post_comment_count}','{$status}','{$post_tags}')  
+    $query = "INSERT INTO posts (cat_id,post_title,post_author,post_image,post_content,post_date,post_status,post_tags)
+    VALUES ({$cat_id},'{$post_title}','{$post_author}','{$post_image}','{$post_content}',now(),'{$status}','{$post_tags}')  
     ";
     $result = mysqli_query($connection,$query);
     confirmQuery($result);
@@ -37,8 +36,19 @@ if(isset($_POST['create_post'])){
 </div>
 
 <div class="form-group">
-<label for="">post_category_id</label>
-<input type="text" class="form-control" name="post_category_id">
+    <select name="post_category" id="post_category">
+        <?php
+          $query = "SELECT * FROM cat";
+          $select_all=mysqli_query($connection,$query);
+         while($row =mysqli_fetch_assoc($select_all)){
+             $cat_title = $row["cat_title"];
+             $cat_id = $row["cat_id"];
+
+             echo "<option value='{$cat_id}'>{$cat_title}</option>";
+         }
+
+?>
+    </select>
 </div>
 
 <div class="form-group">

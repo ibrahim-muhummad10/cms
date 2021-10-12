@@ -36,12 +36,19 @@ echo "<tr>";
 echo "<td>{$post_id} </td>";
 echo "<td>{$post_author} </td>";
 echo "<td>{$post_title} </td>";
-echo "<td>{$cat_id} </td>";
+$query = "SELECT * FROM cat where cat_id = $cat_id";
+$select_all=mysqli_query($connection,$query);
+while($row =mysqli_fetch_assoc($select_all)){
+   $cat_title = $row["cat_title"];
+   $cat_id = $row["cat_id"];
+}
+echo "<td>{$cat_title} </td>";
 echo "<td>{$status} </td>";
 echo "<td> <img width='100' src='../img/{$post_image}'>    </td>";
 echo "<td>{$post_tags} </td>";
 echo "<td>{$post_comment_count} </td>";
 echo "<td>{$post_date} </td>";
+echo "<td><a href='posts.php?source=edit_posts&p_id={$post_id}'>edit </td>";
 echo "<td><a href='posts.php?delete={$post_id}'>delete </td>";
 echo "</tr>";
 }

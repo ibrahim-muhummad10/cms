@@ -18,7 +18,10 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
      <?php 
-             $query = "SELECT * FROM posts WHERE post_status = 'published' ";
+     if(isset($_GET['category'])){
+       $cat_id = $_GET['category'];
+     }
+             $query = "SELECT * FROM posts WHERE cat_id = $cat_id";
              $select_all_posts=mysqli_query($connection,$query);
              while($row = mysqli_fetch_assoc($select_all_posts)){
                  $post_id = $row['post_id'];
@@ -27,11 +30,6 @@
                  $post_content = $row["post_content"];
                  $post_image = $row["post_image"];
                  $post_date = $row["post_date"]; 
-                 $post_status = $row["post_status"]; 
-
-              
-
-
                  ?>
              
 
@@ -59,7 +57,7 @@
 
 
 
-              <?php    } ?>
+              <?php   } ?>
 
                
             </div>
